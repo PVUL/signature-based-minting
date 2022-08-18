@@ -1,4 +1,20 @@
-# Signature Based Minting with Next.JS
+TASKS:
+
+- [ ] style up a page with dummy photos/metadata
+- [ ] figure out how to tie in metadata properly to nft
+
+# base template for:
+
+- gallery of nfts for purchase
+
+TODO:
+
+- mint your own NFT should go away, instead we will show our own images
+- tie in sanity, each with a id to the image
+
+---
+
+## Signature Based Minting with Next.JS
 
 ## Introduction
 
@@ -64,7 +80,7 @@ To get started, we have a ready-made template that includes all the code you nee
 Our application is wrapped in a Thirdweb Provider so that we can access Thirdweb anywhere in our application:
 
 ```tsx
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
+import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Mumbai;
@@ -166,7 +182,7 @@ const { authorAddress, nftName, imagePath } = JSON.parse(req.body);
 const sdk = ThirdwebSDK.fromPrivateKey(
   // Your wallet private key (read it in from .env.local file)
   process.env.PRIVATE_KEY as string,
-  "mumbai"
+  'mumbai'
 );
 ```
 
@@ -175,7 +191,7 @@ const sdk = ThirdwebSDK.fromPrivateKey(
 ```tsx
 const nftCollection = sdk.getNFTCollection(
   // Replace this with your NFT Collection contract address
-  "0x000000000000000000000000000000000000000"
+  '0x000000000000000000000000000000000000000'
 );
 ```
 
@@ -193,7 +209,7 @@ if (!animalNames.includes(nftName?.toLowerCase())) {
 ```tsx
 const hasMinted = (await nftCollection.balanceOf(authorAddress)).gt(0);
 if (hasMinted) {
-  res.status(400).json({ error: "Already minted" });
+  res.status(400).json({ error: 'Already minted' });
   return;
 }
 ```
@@ -210,7 +226,7 @@ const signedPayload = await nftCollection.signature.generate({
   metadata: {
     name: nftName as string,
     image: imagePath as string,
-    description: "An awesome animal NFT",
+    description: 'An awesome animal NFT',
     properties: {
       // Add any properties you want to store on the NFT
     },
@@ -242,7 +258,7 @@ With our API route available, we make `fetch` requests to this API, and securely
 ```tsx
 // Make a request to /api/server
 const signedPayloadReq = await fetch(`/api/server`, {
-  method: "POST",
+  method: 'POST',
   body: JSON.stringify({
     authorAddress: address, // Address of the current user
     nftName: nftName,

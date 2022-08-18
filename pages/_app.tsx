@@ -1,9 +1,9 @@
-import React from "react";
-import type { AppProps } from "next/app";
-import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
-import Head from "next/head";
-import ThirdwebGuideFooter from "../components/guide/ThirdwebGuideFooter";
-import "./styles/globals.css";
+import React from 'react';
+import type { AppProps } from 'next/app';
+import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
+import Head from 'next/head';
+import ThirdwebGuideFooter from '../components/guide/ThirdwebGuideFooter';
+import '../styles/globals.css';
 
 // This is the chainId your dApp will work on.
 const activeChainId = ChainId.Mumbai;

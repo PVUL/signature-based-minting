@@ -1,15 +1,18 @@
-import "../styles/globals.css";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import type { NextApiRequest, NextApiResponse } from "next";
-import animalNames from "../../animalNames";
+import '../styles/globals.css';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import animalNames from '../../animalNames';
 
 export default async function server(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
+    // TODO: we can pass other values into the request
+    //       such as metadata, characteristics, etc.
+
     // De-structure the arguments we passed in out of the request body
-    const { authorAddress, nftName, imagePath } = JSON.parse(req.body);
+    const { minterAddress, nftName, imagePath } = JSON.parse(req.body);
 
     // You'll need to add your private key in a .env.local file in the root of your project
     // !!!!! NOTE !!!!! NEVER LEAK YOUR PRIVATE KEY to anyone!
@@ -21,7 +24,7 @@ export default async function server(
     const sdk = ThirdwebSDK.fromPrivateKey(
       // Your wallet private key (read it in from .env.local file)
       process.env.PRIVATE_KEY as string,
-      "mumbai"
+      'mumbai'
     );
 
     // Load the NFT Collection via it's contract address using the SDK
@@ -35,32 +38,38 @@ export default async function server(
 
     // 1) Check that it's an animal name from our list of animal names
     // This demonstrates how we can restrict what kinds of NFTs we give signatures for
-    if (!animalNames.includes(nftName?.toLowerCase())) {
-      res.status(400).json({ error: "That's not one of the animals we know!" });
-      return;
-    }
+    // if (!animalNames.includes(nftName?.toLowerCase())) {
+    //   res.status(400).json({ error: "That's not one of the animals we know!" });
+    //   return;
+    // }
 
     // 2) Check that this wallet hasn't already minted a page - 1 NFT per wallet
-    const hasMinted = (await nftCollection.balanceOf(authorAddress)).gt(0);
-    if (hasMinted) {
-      res.status(400).json({ error: "Already minted" });
-      return;
-    }
+    // const hasMinted = (await nftCollection.balanceOf(minterAddress)).gt(0);
+    // if (hasMinted) {
+    //   res.status(400).json({ error: 'Already minted' });
+    //   return;
+    // }
 
     // If all the checks pass, begin generating the signature...
 
     // Generate the signature for the page NFT
     const signedPayload = await nftCollection.signature.generate({
-      to: authorAddress,
+      to: minterAddress,
       metadata: {
         name: nftName as string,
         image: imagePath as string,
-        description: "An awesome animal NFT",
+        description: 'An awesome animal NFT',
         properties: {
+          //
           // Add any properties you want to store on the NFT
+          //
+          // TODO: this is where the add'l metadata would go in
+          //
         },
       },
     });
+
+    console.log(signedPayload);
 
     // Return back the signedPayload to the client.
     res.status(200).json({
