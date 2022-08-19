@@ -10,7 +10,7 @@ import {
   useSigner,
 } from '@thirdweb-dev/react';
 import type { NextPage } from 'next';
-import styles from '../styles/Home.module.css';
+// import styles from '../styles/Home.module.css';
 
 // import { ChainId } from '@thirdweb-dev/sdk';
 // import { useState } from 'react';
@@ -125,11 +125,55 @@ const Home: NextPage = () => {
 
   */
 
+  const products = [
+    {
+      id: 1,
+      name: 'Earthen Bottle',
+      href: '#',
+      price: '$48',
+      imageSrc:
+        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
+      imageAlt:
+        'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
+    },
+    {
+      id: 2,
+      name: 'Nomad Tumbler',
+      href: '#',
+      price: '$35',
+      imageSrc:
+        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
+      imageAlt:
+        'Olive drab green insulated bottle with flared screw lid and flat top.',
+    },
+    {
+      id: 3,
+      name: 'Focus Paper Refill',
+      href: '#',
+      price: '$89',
+      imageSrc:
+        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+      imageAlt:
+        'Person using a pen to cross a task off a productivity paper card.',
+    },
+    {
+      id: 4,
+      name: 'Machined Mechanical Pencil',
+      href: '#',
+      price: '$35',
+      imageSrc:
+        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
+      imageAlt:
+        'Hand holding black machined steel mechanical pencil with brass tip and top.',
+    },
+    // More products...
+  ];
+
   return (
-    <>
+    <div>
       {/* Header */}
-      <div className={styles.header}>
-        <div className={styles.left}>
+      <div>
+        <div>
           <div>
             <a
               href="https://thirdweb.com/"
@@ -140,36 +184,26 @@ const Home: NextPage = () => {
             </a>
           </div>
         </div>
-        <div className={styles.right}>
+        <div>
           {address ? (
             <>
-              <a
-                className={styles.secondaryButton}
-                onClick={() => disconnectWallet()}
-              >
-                Disconnect Wallet
-              </a>
+              <a onClick={() => disconnectWallet()}>Disconnect Wallet</a>
               <p style={{ marginLeft: 8, marginRight: 8, color: 'grey' }}>|</p>
               <p>
                 {address.slice(0, 6).concat('...').concat(address.slice(-4))}
               </p>
             </>
           ) : (
-            <a
-              className={styles.mainButton}
-              onClick={() => connectWithMetamask()}
-            >
-              Connect Wallet
-            </a>
+            <a onClick={() => connectWithMetamask()}>Connect Wallet</a>
           )}
         </div>
       </div>
 
       {/* Content */}
-      <div className={styles.container}>
+      <div className="">
         {/* Top Section */}
-        <h1 className={styles.h1}>PVUL IS HERE</h1>
-        <p className={styles.explain}>
+        <h1>PVUL IS HERE</h1>
+        <p>
           Signature-based minting with{' '}
           <b>
             {' '}
@@ -177,7 +211,6 @@ const Home: NextPage = () => {
               href="https://thirdweb.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.purple}
             >
               thirdweb
             </a>
@@ -190,26 +223,45 @@ const Home: NextPage = () => {
           <b>animal name</b>! 😉
         </p>
 
-        <hr className={styles.divider} />
+        <hr />
 
         {/* <MintYourNft /> */}
 
-        <hr className={styles.smallDivider} />
+        <div className="bg-white">
+          <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <h2 className="sr-only">Products</h2>
 
-        <div className={styles.collectionContainer}>
-          <h2 className={styles.ourCollection}>
-            Other NFTs in this collection:
-          </h2>
+            <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+              {products.map((product) => (
+                <a key={product.id} href={product.href} className="group">
+                  <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
+                    <img
+                      src={product.imageSrc}
+                      alt={product.imageAlt}
+                      className="w-full h-full object-center object-cover group-hover:opacity-75"
+                    />
+                  </div>
+                  <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
+                  <p className="mt-1 text-lg font-medium text-gray-900">
+                    {product.price}
+                  </p>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div>
+          <h2>Other NFTs in this collection:</h2>
 
           {loadingNfts ? (
             <p>Loading...</p>
           ) : (
-            <div className={styles.nftGrid}>
+            <div>
               {nfts?.map((nft) => (
-                <div
-                  className={styles.nftItem}
-                  key={nft.metadata.id.toString()}
-                >
+                <div key={nft.metadata.id.toString()}>
                   <div>
                     <ThirdwebNftMedia
                       metadata={nft.metadata}
@@ -243,7 +295,7 @@ const Home: NextPage = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
