@@ -10,32 +10,14 @@ import {
   useSigner,
 } from '@thirdweb-dev/react';
 import type { NextPage } from 'next';
+import { Gallery } from '../components/Gallery';
+import { localNfts } from '../data';
+
 // import styles from '../styles/Home.module.css';
 
 // import { ChainId } from '@thirdweb-dev/sdk';
 // import { useState } from 'react';
 // import { MintYourNft } from '../components/MintYourNft';
-
-// dummy data for local dev testing
-let localNfts = [
-  {
-    id: 0, // Unique ID for each NFT corresponding to its position in the array
-    name: 'NFT 1', // A name for the NFT
-    description: 'This is our first amazing NFT', // Description for the NFT
-    url: 'https://ipfs.io/ipfs/bafybeih7qusbk3vz7afvtvu6s4r25mj2jjzttnxi577hsfxb64hierrcqm', // URL for the NFT image
-    price: 0.01, // The price of the NFT
-    minted: false, // A variable to indicate if the NFT has been minted
-  },
-  {
-    id: 1, // Unique ID for each NFT corresponding to its position in the array
-    name: 'NFT 2', // A name for the NFT
-    description: 'This is our first amazing NFT', // Description for the NFT
-    url: 'https://gateway.thirdweb.dev/ipfs/Qmd8ErisuuW3Ps2MJy4NeUwCy4Lz578dc7RbCVLHufi5rn/0.jpeg', // URL for the NFT image
-    price: 0.01, // The price of the NFT
-    minted: false, // A variable to indicate if the NFT has been minted
-  },
-  // Add more NFTs here...
-];
 
 const Home: NextPage = () => {
   // Helpful thirdweb hooks to connect and manage the wallet from metamask.
@@ -125,50 +107,6 @@ const Home: NextPage = () => {
 
   */
 
-  const products = [
-    {
-      id: 1,
-      name: 'Earthen Bottle',
-      href: '#',
-      price: '$48',
-      imageSrc:
-        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-      imageAlt:
-        'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
-    },
-    {
-      id: 2,
-      name: 'Nomad Tumbler',
-      href: '#',
-      price: '$35',
-      imageSrc:
-        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-      imageAlt:
-        'Olive drab green insulated bottle with flared screw lid and flat top.',
-    },
-    {
-      id: 3,
-      name: 'Focus Paper Refill',
-      href: '#',
-      price: '$89',
-      imageSrc:
-        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-      imageAlt:
-        'Person using a pen to cross a task off a productivity paper card.',
-    },
-    {
-      id: 4,
-      name: 'Machined Mechanical Pencil',
-      href: '#',
-      price: '$35',
-      imageSrc:
-        'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-      imageAlt:
-        'Hand holding black machined steel mechanical pencil with brass tip and top.',
-    },
-    // More products...
-  ];
-
   return (
     <div>
       {/* Header */}
@@ -217,39 +155,11 @@ const Home: NextPage = () => {
           </b>{' '}
           + Next.JS to create a community-made NFT collection with restrictions.
         </p>
-
-        <p>
-          Hint: We only give out signatures if your NFT name is a cool{' '}
-          <b>animal name</b>! 😉
-        </p>
-
         <hr />
 
         {/* <MintYourNft /> */}
 
-        <div className="bg-white">
-          <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <h2 className="sr-only">Products</h2>
-
-            <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
-              {products.map((product) => (
-                <a key={product.id} href={product.href} className="group">
-                  <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden">
-                    <img
-                      src={product.imageSrc}
-                      alt={product.imageAlt}
-                      className="w-full h-full object-center object-cover group-hover:opacity-75"
-                    />
-                  </div>
-                  <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
-                  <p className="mt-1 text-lg font-medium text-gray-900">
-                    {product.price}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        <Gallery collection={localNfts} />
 
         <hr />
 
