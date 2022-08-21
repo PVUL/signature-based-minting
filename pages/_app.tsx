@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="keywords" content="thirdweb signature based minting" />
       </Head>
       <Component {...pageProps} />
-      <ThirdwebGuideFooter />
+      {/* <ThirdwebGuideFooter /> */}
     </ThirdwebProvider>
   );
 }

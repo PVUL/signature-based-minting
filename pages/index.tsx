@@ -12,6 +12,7 @@ import {
 import type { NextPage } from 'next';
 import { Gallery } from '../components/Gallery';
 import { localNfts } from '../data';
+import { Header } from '../components/Header';
 
 // import styles from '../styles/Home.module.css';
 
@@ -107,106 +108,99 @@ const Home: NextPage = () => {
 
   */
 
+  const Login = () => (
+    <>
+      <a href="https://thirdweb.com/" target="_blank" rel="noopener noreferrer">
+        <img src={`/logo.png`} alt="Thirdweb Logo" width={135} />
+      </a>
+      {address ? (
+        <>
+          <a onClick={() => disconnectWallet()}>Disconnect Wallet</a>
+          <p style={{ marginLeft: 8, marginRight: 8, color: 'grey' }}>|</p>
+          <p>{address.slice(0, 6).concat('...').concat(address.slice(-4))}</p>
+        </>
+      ) : (
+        <a onClick={() => connectWithMetamask()}>Connect Wallet</a>
+      )}
+    </>
+  );
+
   return (
-    <div>
-      {/* Header */}
-      <div>
-        <div>
-          <div>
-            <a
-              href="https://thirdweb.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src={`/logo.png`} alt="Thirdweb Logo" width={135} />
-            </a>
-          </div>
-        </div>
-        <div>
-          {address ? (
-            <>
-              <a onClick={() => disconnectWallet()}>Disconnect Wallet</a>
-              <p style={{ marginLeft: 8, marginRight: 8, color: 'grey' }}>|</p>
-              <p>
-                {address.slice(0, 6).concat('...').concat(address.slice(-4))}
-              </p>
-            </>
-          ) : (
-            <a onClick={() => connectWithMetamask()}>Connect Wallet</a>
-          )}
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="">
-        {/* Top Section */}
-        <h1>PVUL IS HERE</h1>
-        <p>
-          Signature-based minting with{' '}
-          <b>
-            {' '}
-            <a
-              href="https://thirdweb.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              thirdweb
-            </a>
-          </b>{' '}
-          + Next.JS to create a community-made NFT collection with restrictions.
-        </p>
-        <hr />
-
-        {/* <MintYourNft /> */}
-
-        <Gallery collection={localNfts} />
-
-        <hr />
-
-        <div>
-          <h2>Other NFTs in this collection:</h2>
-
-          {loadingNfts ? (
-            <p>Loading...</p>
-          ) : (
-            <div>
-              {nfts?.map((nft) => (
-                <div key={nft.metadata.id.toString()}>
-                  <div>
-                    <ThirdwebNftMedia
-                      metadata={nft.metadata}
-                      style={{
-                        height: 90,
-                        borderRadius: 16,
-                      }}
-                    />
-                  </div>
-                  <div style={{ textAlign: 'center' }}>
-                    <p>Named</p>
-                    <p>
-                      <b>{nft.metadata.name}</b>
-                    </p>
-                  </div>
-
-                  <div style={{ textAlign: 'center' }}>
-                    <p>Owned by</p>
-                    <p>
-                      <b>
-                        {nft.owner
-                          .slice(0, 6)
-                          .concat('...')
-                          .concat(nft.owner.slice(-4))}
-                      </b>
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
+    <div className="flex flex-col min-h-screen mx-auto">
+      <Header className="flex-none w-80" />
+      <Gallery collection={localNfts} className="pl-80" />
     </div>
   );
 };
+
+//       <div className="grid space-x-3">
+
+//         <h1>PVUL IS HERE</h1>
+//         <p>
+//           Signature-based minting with{' '}
+//           <b>
+//             {' '}
+//             <a
+//               href="https://thirdweb.com/"
+//               target="_blank"
+//               rel="noopener noreferrer"
+//             >
+//               thirdweb
+//             </a>
+//           </b>{' '}
+//           + Next.JS to create a community-made NFT collection with restrictions.
+//         </p>
+//         <hr />
+
+//         <MintYourNft />
+
+//       <hr />
+
+//         <div>
+//           <h2>Other NFTs in this collection:</h2>
+
+//           {loadingNfts ? (
+//             <p>Loading...</p>
+//           ) : (
+//             <div>
+//               {nfts?.map((nft) => (
+//                 <div key={nft.metadata.id.toString()}>
+//                   <div>
+//                     <ThirdwebNftMedia
+//                       metadata={nft.metadata}
+//                       style={{
+//                         height: 90,
+//                         borderRadius: 16,
+//                       }}
+//                     />
+//                   </div>
+//                   <div style={{ textAlign: 'center' }}>
+//                     <p>Named</p>
+//                     <p>
+//                       <b>{nft.metadata.name}</b>
+//                     </p>
+//                   </div>
+
+//                   <div style={{ textAlign: 'center' }}>
+//                     <p>Owned by</p>
+//                     <p>
+//                       <b>
+//                         {nft.owner
+//                           .slice(0, 6)
+//                           .concat('...')
+//                           .concat(nft.owner.slice(-4))}
+//                       </b>
+//                     </p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+
+//   );
+// };
 
 export default Home;
