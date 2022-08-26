@@ -2,7 +2,6 @@
 
 ### To Do
 
-- [ ] style page  
 - [ ] create simple gallery with ability to lazy mint specific NFTs and show up in the testnets  
 - [ ] proper metadata structure json file for ipfs, and when to do upload (after nft upload?)  
 - [ ] batch uploads programmtically to nft.storage, get ipfs URI for metadata and also for sanity.  
@@ -13,6 +12,7 @@
 
 ### In Progress
 
+- [ ] style page  
 
 ### Done
 

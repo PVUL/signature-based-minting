@@ -1,8 +1,5 @@
 import {
   ThirdwebNftMedia,
-  useAddress,
-  useDisconnect,
-  useMetamask,
   useNetwork,
   useNetworkMismatch,
   useNFTCollection,
@@ -22,9 +19,6 @@ import { Header } from '../components/Header';
 
 const Home: NextPage = () => {
   // Helpful thirdweb hooks to connect and manage the wallet from metamask.
-  const address = useAddress();
-  const connectWithMetamask = useMetamask();
-  const disconnectWallet = useDisconnect();
   const signer = useSigner();
   const isOnWrongNetwork = useNetworkMismatch();
   const [, switchNetwork] = useNetwork();
@@ -108,53 +102,19 @@ const Home: NextPage = () => {
 
   */
 
-  const Login = () => (
-    <>
-      <a href="https://thirdweb.com/" target="_blank" rel="noopener noreferrer">
-        <img src={`/logo.png`} alt="Thirdweb Logo" width={135} />
-      </a>
-      {address ? (
-        <>
-          <a onClick={() => disconnectWallet()}>Disconnect Wallet</a>
-          <p style={{ marginLeft: 8, marginRight: 8, color: 'grey' }}>|</p>
-          <p>{address.slice(0, 6).concat('...').concat(address.slice(-4))}</p>
-        </>
-      ) : (
-        <a onClick={() => connectWithMetamask()}>Connect Wallet</a>
-      )}
-    </>
-  );
+  // mx-auto md:flex-col md:min-h-screen sm:flex-row sm:min-w-screen
 
   return (
-    <div className="flex flex-col min-h-screen mx-auto">
-      <Header className="flex-none w-80" />
-      <Gallery collection={localNfts} className="pl-80" />
+    <div className="flex sm:flex-col">
+      <Header className={`h-14 sm:w-64 sm:h-screen`} />
+      <Gallery collection={localNfts} className={`mt-14 sm:mt-0 sm:ml-64`} />
     </div>
   );
 };
 
 //       <div className="grid space-x-3">
 
-//         <h1>PVUL IS HERE</h1>
-//         <p>
-//           Signature-based minting with{' '}
-//           <b>
-//             {' '}
-//             <a
-//               href="https://thirdweb.com/"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//             >
-//               thirdweb
-//             </a>
-//           </b>{' '}
-//           + Next.JS to create a community-made NFT collection with restrictions.
-//         </p>
-//         <hr />
-
 //         <MintYourNft />
-
-//       <hr />
 
 //         <div>
 //           <h2>Other NFTs in this collection:</h2>

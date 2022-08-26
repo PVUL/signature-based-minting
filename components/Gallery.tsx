@@ -20,6 +20,12 @@ export const Gallery = ({ collection, className }: Props) => {
   const [isVisible, setIsVisible] = useState(false);
   const scrollDirection = useScrollDirection();
 
+  const items = [
+    { id: 1, color: '#F45D4C' },
+    { id: 2, color: '#A1DBB2' },
+    { id: 3, color: '#FACA66' },
+  ];
+
   const onChange = useCallback((changes, _observer) => {
     changes.forEach((change) => {
       // isIntersecting means it is visible in the window (and considering rootMargin)
@@ -56,28 +62,39 @@ export const Gallery = ({ collection, className }: Props) => {
     return () => images.forEach((img) => observer.unobserve(img));
   }, [onChange]);
 
-  // gets random integer between min and max, inclusive
-  const getRandomInt = (min: number, max: number) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-
-    // const acceptableNumbers = [
-    //   32, 28, 24, 20, 16, 14, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
-    // ];
-
-    const random = Math.floor(Math.random() * (max - min + 1) + min);
-
-    // for (let i = random; i >= 0; i--) {
-    //   if (acceptableNumbers.includes(i)) return i;
-    // }
-  };
-
   return (
-    <div className={`bg-white ${className}`}>
-      <div className="h-screen text-xl bg-blue-300">collection name</div>
+    <div className={`bg-white overflow-hidden ${className}`}>
+      <div className="h-screen py-20 bg-blue-300">
+        <h1 className="text-4xl">collection name</h1>
+        <p className="pt-8">
+          description for this gallery, it's a dope gallery
+        </p>
+        <div className="flex items-stretch pl-1 mt-32 overflow-hidden transition ease-out scale-125 h-80">
+          <div className="w-32 h-96 bg-[#F45D4C] flex-auto hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+          <div className="w-32 flex-auto h-96 bg-[#A1DBB2] hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+          <div className="w-24 flex-auto h-96 bg-[#FACA66] hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+        </div>
+        <div className="flex items-stretch pl-1 mt-20 overflow-hidden transition ease-out scale-125 h-80">
+          <div className="w-32 h-96 bg-[#F7A541] flex-auto hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+          <div className="w-32 flex-auto h-96 bg-[#54787D] hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+          <div className="w-24 flex-auto h-96 bg-[#5B527F] hover:w-80 hover:ease-in duration-500 rotate-12 scale-125">
+            test
+          </div>
+        </div>
+      </div>
 
-      <div className="max-w-6xl px-4 py-16 mx-auto sm:py-24 sm:px-6">
-        <div className="grid grid-cols-1 px-10 pt-40 sm:grid-cols-1 gap-x-6 lg:grid-cols-1 xl:grid-cols-3 xl:gap-x-6 gap-y-32">
+      <div className="w-screen py-16 mx-auto spx-4 sm:py-24 sm:px-6 sm:w-auto">
+        <div className="grid grid-cols-1 px-10 pt-40 sm:grid-cols-1 gap-x-6 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-6 sm:gap-y-32 gap-y-16">
           {collection.map((nft) => (
             <a
               key={nft.id}
