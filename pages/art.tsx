@@ -1,4 +1,4 @@
-import { ArtTest } from '../components/ArtTest';
+import { ArtTest } from '../components/p5/ArtTest';
 
 const Art = () => (
   <div className="h-screen bg-slate-300">

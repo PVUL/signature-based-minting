@@ -1,33 +1,33 @@
-import { DynamicP5 } from '../../utils/DynamicP5';
-import { Sketch } from 'react-p5-wrapper';
+import { DynamicP5 } from '../DynamicP5';
+import { P5CanvasInstance, Sketch } from 'react-p5-wrapper';
 
 /**
- * This is a component used to test p5 drawings
+ * Color spectrum in a grid
  *
- * @param p5
+ * @param p
  */
 
-const sketch: Sketch = (p5) => {
-  p5.setup = () => {
-    p5.createCanvas(800, 400);
-    p5.background(0);
-    // p5.noCursor();
+const sketch: Sketch = (p: P5CanvasInstance) => {
+  p.setup = () => {
+    p.createCanvas(800, 400);
+    p.background(0);
+    // p.noCursor();
   };
 
-  p5.draw = () => {
-    // p5.print(p5.frameCount);
-    p5.colorMode('hsb', p5.width, p5.height, 100);
-    p5.rectMode('center');
-    p5.noStroke();
-    // p5.background(p5.mouseY / 2, 100, 100);
+  p.draw = () => {
+    // p.print(p.frameCount);
+    p.colorMode('hsb', p.width, p.height, 100);
+    p.rectMode('center');
+    p.noStroke();
+    // p.background(p.mouseY / 2, 100, 100);
 
-    let stepX = p5.mouseX + 2;
-    let stepY = p5.mouseY + 2;
+    let stepX = p.mouseX + 2;
+    let stepY = p.mouseY + 2;
 
-    for (let gridY = 0; gridY < p5.height; gridY += stepY) {
-      for (let gridX = 0; gridX < p5.width; gridX += stepX) {
-        p5.fill(gridX, p5.height - gridY, 100);
-        p5.rect(gridX, gridY, stepX, stepY);
+    for (let gridY = 0; gridY < p.height; gridY += stepY) {
+      for (let gridX = 0; gridX < p.width; gridX += stepX) {
+        p.fill(gridX, p.height - gridY, 100);
+        p.rect(gridX, gridY, stepX, stepY);
       }
     }
   };
